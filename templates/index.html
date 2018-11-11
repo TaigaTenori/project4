@@ -31,17 +31,28 @@
   </div>
   <div class="left">left</div>
   <div class="main">
+    
     {% for recipe in recipies %}
-      <div class="recipe">
-        <p>{{ recipe.category }}</p>
-        <p>{{ recipe.title }}</p>
-        <p>{{ recipe.username }}</p>
-        <p>{{ recipe.desc }}</p>
-        <p>{{ recipe.date_added }}</p>
-        <p>{{ recipe.upvotes }}</p>
+      <div class="post">
+        <p><strong>Category:</strong> {{ recipe.category }}</p>
+        <p><strong>Name:</strong> {{ recipe.title }}</p>
+        <p><strong>User:</strong> {{ recipe.username }}</p>
+        <p>
+          <strong>Ingredients:</strong>
+          <ul>
+          {% for k, v in recipe.ingredients.items() %}
+            <li>
+              {{ k }}: {{ v }}
+            </li>
+          {% endfor %}
+          </ul>
+        </p>
+        <p><strong>Description:</strong> {{ recipe.desc }}</p>
+        <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
+        <p><strong>Upvotes:</strong> {{ recipe.upvotes }}</p>
       </div>
     {% endfor %}
-      
+
   </div>
   <div class="right">right</div>
   <div class="footer">footer</div>
