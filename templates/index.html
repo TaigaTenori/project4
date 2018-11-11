@@ -4,8 +4,8 @@
 
 <div class="container">
   <div class="header">
-      <span id="header">Cook Book Plus</span>
-      <span id="header-small"> Where all the tastes come together!</span>
+      <p id="header">Cook Book Plus</p>
+      <p id="header-small"> Where all the tastes come together!</p>
   </div>
   <div class="menu">
        <nav>
@@ -30,8 +30,17 @@
 
   </div>
   <div class="left">left</div>
-  <div class="main">Lorem
-      Lorem
+  <div class="main">
+    {% for recipe in recipies %}
+      <div class="recipe">
+        <p>{{ recipe.category }}</p>
+        <p>{{ recipe.title }}</p>
+        <p>{{ recipe.username }}</p>
+        <p>{{ recipe.desc }}</p>
+        <p>{{ recipe.date_added }}</p>
+        <p>{{ recipe.upvotes }}</p>
+      </div>
+    {% endfor %}
       
   </div>
   <div class="right">right</div>
