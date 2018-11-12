@@ -35,15 +35,65 @@
         <p>&nbsp</p>
         
         <!-- form -->
-          <div class="input-field col s12">
-            <select>
-              <option value="" disabled selected>Choose your option</option>
-                {% for category in categories %}
-                    <option value="{{category._id}}"> {{ category.category }} </option>
-                {% endfor %}
-            </select>
-            <label>Select Category</label>
-          </div>
+        <form class="col s6">
+            <div class="row">
+              <div class="input-field col s12">
+                <select>
+                  <option value="" disabled selected>Choose your option</option>
+                    {% for category in categories %}
+                        <option value="{{category._id}}"> {{ category.category }} </option>
+                    {% endfor %}
+                </select>
+                <label>Select Category</label>
+              </div>
+            </div>
+       <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input name="user" id="username" type="text" class="validate">
+          <label for="username">Username</label>
+        </div>
+       <div class="input-field col s6">
+          <i class="material-icons prefix">insert_emoticon</i>
+          <input name="title" id="title" type="text" class="validate">
+          <label for="title">Recipe Name</label>
+        </div>
+       <div class="input-field col s6">
+          <i class="material-icons prefix">flag</i>
+          <input name="origin" id="origin" type="text" class="validate">
+          <label for="origin">Country of Origin</label>
+        </div>
+        <div class="input-field col s12">
+          <textarea disabled name="ingredients" id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Ingredients list</label>
+        </div>
+        <div class="row">
+            <div class="input-field col s4">
+              <i class="material-icons prefix">pets</i>
+              <input name="ingredient" id="ingredient" type="text" class="validate">
+              <label for="ingredient">Ingredient</label>
+            </div>
+                   <div class="input-field col s3">
+              <i class="material-icons prefix">chevron_right</i>
+              <input name="quantity" id="quantity" type="text" class="validate">
+              <label for="quantity">Quantity</label>
+            </div>
+            <a class="btn-floating btn-medium waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="desc" id="desc" class="materialize-textarea"></textarea>
+                <label for="desc">How to prepare your dish</label>   
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s10"></div>
+            <div class="col s2">
+            <button class="btn waves-effect waves-light red" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+            </div>
+        </div>
+        </form>
 
   </div>
   <div class="right">right</div>
