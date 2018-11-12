@@ -1,7 +1,7 @@
 .container {
   display: grid;
   width: 100%;
-  height: 100%;
+  height: auto;
   grid-template-areas: "header header header"
   "menu menu menu"
   "left main right"
@@ -26,10 +26,12 @@
   grid-area: main;
   height: -webkit-fill-available;
   padding: 5px;
+  margin: 10px;
 }
 .post {
-   border: 1px solid #181818;
-   padding: 5px;
+   border: 1px solid #668ff4;
+   padding: 5px ;
+  margin: 10px;
 }
 .right {
   grid-area: right;
