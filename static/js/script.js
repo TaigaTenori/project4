@@ -13,13 +13,21 @@ $(document).ready(function(){
             return;
         }
         var list = $('#ingredients');
+        var list2 = $('#quantities');
         var txt = list.val();
-        
-        list.val(txt + '\n' + ing + ': ' + quantity);
+        var txt2 = list2.val();
+        var app = ''
+        if (txt != '') {
+            app = '\n' ;
+        }
+        list.val(txt + app + ing);
+        list2.val(txt2 + app + quantity)
         
         x.val('');
         y.val('');
+        
         M.textareaAutoResize($('#ingredients'));
+        M.textareaAutoResize($('#quantities'));
         
     });
 

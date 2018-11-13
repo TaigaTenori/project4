@@ -35,13 +35,13 @@
         <p>&nbsp</p>
         
         <!-- form -->
-        <form class="col s6">
+        <form action="{{url_for('insert_recipe')}}" method="POST" class="col s6">
             <div class="row">
               <div class="input-field col s12">
-                <select>
+                <select name='category'>
                   <option value="" disabled selected>Choose your option</option>
                     {% for category in categories %}
-                        <option value="{{category._id}}"> {{ category.category }} </option>
+                        <option value="{{category.category}}"> {{ category.category }} </option>
                     {% endfor %}
                 </select>
                 <label>Select Category</label>
@@ -49,8 +49,8 @@
             </div>
        <div class="input-field col s6">
           <i class="material-icons prefix">account_circle</i>
-          <input name="user" id="username" type="text" class="validate">
-          <label for="username">Username</label>
+          <input name="username" id="username" type="text" class="validate">
+          <label for="username">Your name</label>
         </div>
        <div class="input-field col s6">
           <i class="material-icons prefix">insert_emoticon</i>
@@ -62,9 +62,15 @@
           <input name="origin" id="origin" type="text" class="validate">
           <label for="origin">Country of Origin</label>
         </div>
-        <div class="input-field col s12">
-          <textarea disabled name="ingredients" id="ingredients" class="materialize-textarea"></textarea>
-          <label for="ingredients">Ingredients list</label>
+        <div class="row">
+            <div class="input-field col s6">
+              <textarea rows=10 readonly name="ingredients" id="ingredients" class="materialize-textarea"></textarea>
+              <label for="ingredients">Ingredients list</label>
+            </div>
+            <div class="input-field col s6">
+              <textarea rows=10 readonly name="quantities" id="quantities" class="materialize-textarea"></textarea>
+              <label for="quantities">quantities list</label>
+            </div>
         </div>
         <div class="row">
             <div class="input-field col s4">

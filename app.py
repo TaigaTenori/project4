@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 import os
 from flask_pymongo import PyMongo
+import time
 
 app = Flask(__name__)
 
@@ -15,6 +16,44 @@ def index():
 @app.route('/add_recipe')
 def add_recipe():
     return render_template('add_recipe.html', categories = mongo.db.categories.find())
+
+@app.route('/insert_recipe', methods= ['POST'])
+def insert_recipe():
+    
+    
+    
+    tmp = request.form.to_dict()
+    tmp['ingredients'] =  tmp['ingredients'].replace('\r\n', ',')
+    tmp['quantities'] = tmp['quantities'].replace('\r\n', ',') 
+    
+    # string.split() creates a list
+    l_one = tmp['ingredients'].split(',')
+    l_two = tmp['quantities'].split(',')
+    
+    # We need to combine ingredients and quantities into a nested dictionary
+    tmp_dict = dict(zip(l_one, l_two))
+    tmp['ingredients'] = tmp_dict
+    
+    
+    # remove keys we won't be using
+    del tmp['ingredient']
+    del tmp['quantity']
+    del tmp['quantities']
+    del tmp['action']
+    
+    # last we need to add keys for date and upvotes
+    tmp['date_added'] = time.ctime();
+    tmp['upvotes'] = 0
+    
+    mongo.db.recipies.insert_one(tmp)
+    return redirect('/')
+    
+    # 
+    # return render_template('index.html', dic = tmp)
+    
+    
+    
+
 
 if __name__ == '__main__':
     app.run(host = os.getenv('IP', '0.0.0.0'),
