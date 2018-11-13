@@ -47,7 +47,7 @@
           {% endfor %}
           </ul>
         </p>
-        <p><strong>Description:</strong> {{ recipe.desc }}</p>
+        <p><strong>Description:</strong> {{ recipe.desc.replace('\r\n', '<br/>')|safe }}</p>
         <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
         <p><strong>Upvotes:</strong> {{ recipe.upvotes }}</p>
       </div>
