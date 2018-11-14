@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 import os
 from flask_pymongo import PyMongo
 import time
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
@@ -53,7 +54,10 @@ def insert_recipe():
     
     
     
-
+@app.route('/details/<recipe_id>')
+def recipe_details(recipe_id):
+    
+    return render_template('recipe_details.html', recipe = mongo.db.recipies.find_one({ '_id': ObjectId(recipe_id) }))
 
 if __name__ == '__main__':
     app.run(host = os.getenv('IP', '0.0.0.0'),

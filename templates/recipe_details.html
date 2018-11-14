@@ -32,22 +32,30 @@
   <div class="left">left</div>
   <div class="main">
 
-    {% for recipe in recipies %}
+
       <div class="post">
-        <form action="details/{{recipe._id}}">
-            {% if recipe.image %}
-                 <img src="{{ recipe.image }}"/>
-            {% endif %}
-            <p><strong>Category:</strong> {{ recipe.category }}</p>
-            <p><strong>Name:</strong> {{ recipe.title }}</p>
-            <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
-            <p><strong>Upvotes:</strong> {{ recipe.upvotes }}</p>
-            <button class="btn-small waves-effect waves-light red" type="submit" name="details">View Details
-                    <i class="material-icons right">send</i>
-             </button>
-         </form>
+        {% if recipe.image %}
+             <img src="{{ recipe.image }}"/>
+        {% endif %}
+        <p><strong>Category:</strong> {{ recipe.category }}</p>
+        <p><strong>Name:</strong> {{ recipe.title }}</p>
+        <p><strong>User:</strong> {{ recipe.username }}</p>
+        <p>
+          <strong>Ingredients:</strong>
+          <ul class="browser-default">
+          {% for k, v in recipe.ingredients.items() %}
+            <li>
+              {{ k }}: {{ v }}
+            </li>
+          {% endfor %}
+          </ul>
+        </p>
+        <p><strong>Description:</strong> {{ recipe.desc.replace('\r\n', '<br/>')|safe }}</p>
+        <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
+        <p><strong>Upvotes:</strong> {{ recipe.upvotes }}</p>
+
       </div>
-    {% endfor %}
+
 
   </div>
   <div class="right">right</div>
