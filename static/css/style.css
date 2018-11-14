@@ -22,6 +22,7 @@
 .left {
   grid-area: left;
 }
+
 .main {
   grid-area: main;
   height: -webkit-fill-available;
@@ -32,6 +33,12 @@
    border: 1px solid #668ff4;
    padding: 5px ;
   margin: 10px;
+  overflow: hidden;
+}
+.post img {
+  float: right;
+  width: 320px;
+  height: 240px;
 }
 .right {
   grid-area: right;

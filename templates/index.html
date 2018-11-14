@@ -31,15 +31,18 @@
   </div>
   <div class="left">left</div>
   <div class="main">
-    {{ dic }}
+
     {% for recipe in recipies %}
       <div class="post">
+        {% if recipe.image %}
+             <img src="{{ recipe.image }}"/>
+        {% endif %}
         <p><strong>Category:</strong> {{ recipe.category }}</p>
         <p><strong>Name:</strong> {{ recipe.title }}</p>
         <p><strong>User:</strong> {{ recipe.username }}</p>
         <p>
           <strong>Ingredients:</strong>
-          <ul>
+          <ul class="browser-default">
           {% for k, v in recipe.ingredients.items() %}
             <li>
               {{ k }}: {{ v }}
@@ -50,6 +53,7 @@
         <p><strong>Description:</strong> {{ recipe.desc.replace('\r\n', '<br/>')|safe }}</p>
         <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
         <p><strong>Upvotes:</strong> {{ recipe.upvotes }}</p>
+
       </div>
     {% endfor %}
 
