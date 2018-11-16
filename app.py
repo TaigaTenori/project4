@@ -3,7 +3,7 @@ import os
 from flask_pymongo import PyMongo
 import time
 from bson.objectid import ObjectId
-
+import json
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = "cookbook"
@@ -22,24 +22,31 @@ def add_recipe():
 def insert_recipe():
     
     
-    
+    tmp_dict = {}
     tmp = request.form.to_dict()
+    print(tmp['ingredients'])
     tmp['ingredients'] =  tmp['ingredients'].replace('\r\n', ',')
-    tmp['quantities'] = tmp['quantities'].replace('\r\n', ',') 
     
+    
+    #if tmp['ingredients'][-1:] == ',':
+    #    tmp['ingredients'] =  tmp['ingredients'][:-1]
+        
+
     # string.split() creates a list
     l_one = tmp['ingredients'].split(',')
-    l_two = tmp['quantities'].split(',')
+    print(tmp['ingredients'])
+    print(l_one)
+    for i in range(0, len(l_one), 1):
+        l_two = l_one[i].split('-')
+        if len(l_two) == 2:
+            tmp_dict[l_two[0]] = l_two[1]
     
-    # We need to combine ingredients and quantities into a nested dictionary
-    tmp_dict = dict(zip(l_one, l_two))
+    
     tmp['ingredients'] = tmp_dict
     
     
     # remove keys we won't be using
-    del tmp['ingredient']
-    del tmp['quantity']
-    del tmp['quantities']
+
     del tmp['action']
     
     # last we need to add keys for date and upvotes
@@ -58,6 +65,23 @@ def insert_recipe():
 def recipe_details(recipe_id):
     
     return render_template('recipe_details.html', recipe = mongo.db.recipies.find_one({ '_id': ObjectId(recipe_id) }))
+
+@app.route('/edit/<recipe_id>')
+def edit_recipe(recipe_id):
+    recipe = mongo.db.recipies.find_one({'_id': ObjectId(recipe_id) })
+    ingredients = recipe['ingredients']
+    return render_template('edit_recipe.html',categories = mongo.db.categories.find(), recipe = recipe, ingredients = ingredients )
+
+
+@app.route('/update/<recipe_id>', methods=["POST"])
+def update_recipe(recipe_id):
+    # apparently not really an update, but same experience for the user and less code and more elegant I think.
+   insert_recipe()
+   mongo.db.recipies.delete_one({'_id': ObjectId(recipe_id) })
+   return redirect('/')
+
+
+
 
 if __name__ == '__main__':
     app.run(host = os.getenv('IP', '0.0.0.0'),
