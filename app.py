@@ -11,6 +11,7 @@ app.config['MONGO_URI'] = "mongodb://admin:verysecret12@ds241012.mlab.com:41012/
 
 mongo = PyMongo(app)
 @app.route('/')
+@app.route('/deleted')
 def index():
     return render_template('index.html', recipies = mongo.db.recipies.find())
 
@@ -38,7 +39,7 @@ def insert_recipe():
     print(l_one)
     for i in range(0, len(l_one), 1):
         l_two = l_one[i].split('-')
-        if len(l_two) == 2:
+        if len(l_two) == 2: # if the list isnt complete with key - value pair it means it's likely a comma from leading or trailing \r\n
             tmp_dict[l_two[0]] = l_two[1]
     
     
@@ -50,6 +51,7 @@ def insert_recipe():
     del tmp['action']
     
     # last we need to add keys for date and upvotes
+    
     tmp['date_added'] = time.ctime();
     tmp['upvotes'] = 0
     
@@ -72,7 +74,19 @@ def edit_recipe(recipe_id):
     ingredients = recipe['ingredients']
     return render_template('edit_recipe.html',categories = mongo.db.categories.find(), recipe = recipe, ingredients = ingredients )
 
-
+@app.route('/delete/<recipe_id>')
+def delete_recipe(recipe_id):
+    mongo.db.recipies.delete_one({'_id': ObjectId(recipe_id) })
+    redirect('/deleted')
+    
+@app.route('/action/<recipe_id>')
+def decide_action(recipe_id):
+    if 'edit_button' in request.form:
+        edit_recipe(recipe_id)
+    else:
+        delete_recipe(recipe_id)
+    return redirect('/deleted')
+    
 @app.route('/update/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
     # apparently not really an update, but same experience for the user and less code and more elegant I think.
