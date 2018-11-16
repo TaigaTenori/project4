@@ -34,7 +34,7 @@
 
 
       <div class="post">
-        <form action="/action/{{recipe._id}}" method="GET">
+        <form action="/action/{{recipe._id}}" method="POST">
           {% if recipe.image %}
                <img src="{{ recipe.image }}"/>
           {% endif %}
@@ -54,6 +54,7 @@
           <p><strong>Description:</strong> {{ recipe.desc.replace('\r\n', '<br/>')|safe }}</p>
           <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
           <p><strong>Upvotes:</strong> {{ recipe.upvotes }}</p>
+          <input type="hidden" name="book_name" value="Name of Book here" /> 
           <button class="btn-small waves-effect waves-light red" type="submit" name="edit_button">Edit Recipe<i class="material-icons right">edit</i>
           </button>
           <button class="btn-small waves-effect waves-light red" type="submit" name="delete_button">Delete Recipe<i class="material-icons right">delete</i>

@@ -12,6 +12,7 @@ app.config['MONGO_URI'] = "mongodb://admin:verysecret12@ds241012.mlab.com:41012/
 mongo = PyMongo(app)
 @app.route('/')
 @app.route('/deleted')
+@app.route('/edited')
 def index():
     return render_template('index.html', recipies = mongo.db.recipies.find())
 
@@ -77,15 +78,16 @@ def edit_recipe(recipe_id):
 @app.route('/delete/<recipe_id>')
 def delete_recipe(recipe_id):
     mongo.db.recipies.delete_one({'_id': ObjectId(recipe_id) })
-    redirect('/deleted')
-    
-@app.route('/action/<recipe_id>')
-def decide_action(recipe_id):
-    if 'edit_button' in request.form:
-        edit_recipe(recipe_id)
-    else:
-        delete_recipe(recipe_id)
     return redirect('/deleted')
+    
+@app.route('/action/<recipe_id>', methods=["POST"])
+def decide_action(recipe_id):
+    if 'edit_button' in request.form.to_dict():
+        return edit_recipe(recipe_id)
+    else:
+        return delete_recipe(recipe_id)
+
+    return redirect('/')
     
 @app.route('/update/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
