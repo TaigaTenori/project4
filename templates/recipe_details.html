@@ -31,12 +31,13 @@
           <div class="description" >{{ recipe.desc.replace('\r\n', '<br/>')|safe }}</div>
           <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
           <span id="span_rid" style="display: none">{{recipe._id}}</span>
-          <p><strong>Upvotes: </strong><span id="upvotes"> {{ recipe.upvotes }}  </span><i id="upvote_button" class="small material-icons">arrow_upward</i></p>
+          <p><strong>Upvotes: </strong><span id="upvotes"> {{ recipe.upvotes }}  </span></p>
           <input type="hidden" name="book_name" value="Name of Book here" /> 
           <button class="btn-small waves-effect waves-light red" type="submit" name="edit_button">Edit Recipe<i class="material-icons right">edit</i>
           </button>
           <button class="btn-small waves-effect waves-light red" type="submit" name="delete_button">Delete Recipe<i class="material-icons right">delete</i>
           </button>
+          <img id="upvote_button" src="{{url_for('static',filename = 'images/upvote-icon-11.jpg')}}"/>
         </form>
       </div>
 
