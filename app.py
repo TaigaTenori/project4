@@ -108,6 +108,7 @@ def update_recipe(recipe_id):
    return redirect('/')
 
 
+# This is AJAX only
 @app.route('/upvote/<recipe_id>', methods=["POST"])
 def upvote_recipe(recipe_id):
 

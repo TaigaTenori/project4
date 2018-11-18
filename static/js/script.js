@@ -40,7 +40,8 @@ $(document).ready(function(){
                 console.log(response);
                 var uv = $('#upvotes');
                 uv.text(parseInt(uv.text()) + 1);
-            },
+                $('#upvote_button').remove();
+                },
             error: function(error) {
                 console.log(error);
             }

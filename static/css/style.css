@@ -12,7 +12,19 @@
 .container > div {
   border: 1px dashed #888;
 }
-
+.description {
+  margin: 50px;
+  
+  border: 3px solid;
+  
+  padding: 15px;
+}
+.main strong {
+  font-weight: 800;
+  font-family: Arial;
+  font-size: 1.2em;
+  color: rgb(112, 103, 103) ;
+}
 .header {
   grid-area: header;
   background-image: url('../images/header.jpg');

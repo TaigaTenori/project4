@@ -51,9 +51,10 @@
             {% endfor %}
             </ul>
           </p>
-          <p><strong>Description:</strong> {{ recipe.desc.replace('\r\n', '<br/>')|safe }}</p>
+          <p><strong>Description:</strong></p>
+          <div class="description" >{{ recipe.desc.replace('\r\n', '<br/>')|safe }}</div>
           <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
-          <span id="span_rid" style="display: hidden">{{recipe._id}}</span>
+          <span id="span_rid" style="display: none">{{recipe._id}}</span>
           <p><strong>Upvotes: </strong><span id="upvotes"> {{ recipe.upvotes }}  </span><i id="upvote_button" class="small material-icons">arrow_upward</i></p>
           <input type="hidden" name="book_name" value="Name of Book here" /> 
           <button class="btn-small waves-effect waves-light red" type="submit" name="edit_button">Edit Recipe<i class="material-icons right">edit</i>

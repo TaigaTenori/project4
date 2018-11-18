@@ -43,7 +43,7 @@
     
     {% for recipe in recipies %}
       <div class="post">
-        <form action="details/{{recipe._id}}">
+        <form action="/details/{{recipe._id}}">
             {% if recipe.image %}
                  <img src="{{ recipe.image }}"/>
             {% endif %}
