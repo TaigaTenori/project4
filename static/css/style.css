@@ -17,7 +17,7 @@
 }
 .description {
   margin: 50px;
-  
+  background-color: #E6EE9C;
   border: 3px solid;
   
   padding: 15px;
@@ -45,16 +45,31 @@
   margin: 10px;
 }
 .post {
-   border: 1px solid #668ff4;
+   border: 1px solid #E6EE9C;
+
+   position: relative;
    padding: 15px ;
   margin: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .post img {
+  width: 320px;
+  height: auto;
+}
+.polaroid {
   float: right;
   width: 320px;
-  height: 240px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
 }
+#upvote_button {
+  cursor: pointer;
+}
+.img_container {
+  padding: 5px;
+}
+
 .right {
   grid-area: right;
 }

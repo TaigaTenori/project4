@@ -7,7 +7,12 @@
       <div class="post">
         <form action="/action/{{recipe._id}}" method="POST">
           {% if recipe.image %}
-               <img src="{{ recipe.image }}"/>
+                <div class="polaroid">
+                   <img src="{{ recipe.image }}"/>
+                   <div class="img_container">
+                     <p></p>
+                   </div>
+                </div>
           {% endif %}
           <p><strong>Category:</strong> {{ recipe.category }}</p>
           <p><strong>Name:</strong> {{ recipe.title }}</p>
