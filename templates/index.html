@@ -1,35 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-<div class="container">
-  <div class="header">
-      <p id="header">Cook Book Plus</p>
-      <p id="header-small"> Where all the tastes come together!</p>
-  </div>
-  <div class="menu">
-       <nav>
-          <div class="lime lighten-3 nav-wrapper">
-            
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-              <li><a href="/add_recipe">Add Recipe</a></li>
-              <li><a href="badges.html">Components</a></li>
-              <li><a href="collapsible.html">Javascript</a></li>
-              <li><a href="mobile.html">Mobile</a></li>
-            </ul>
-          </div>
-        </nav>
-
-          <ul class="sidenav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
-          </ul>
-
-  </div>
-  <div class="left">left</div>
   <div class="main">
     <ul id="dropdown2" class="dropdown-content white lighten-5">
       <li><a href="/sort/date_added/asc">Date Added (asc)</a></li>
@@ -59,9 +30,7 @@
     {% endfor %}
 
   </div>
-  <div class="right">right</div>
-  <div class="footer">footer</div>
-</div>
+
 
 
 

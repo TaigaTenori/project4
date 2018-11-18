@@ -12,6 +12,9 @@
 .container > div {
   border: 1px dashed #888;
 }
+.logo:visited{
+  color: white;
+}
 .description {
   margin: 50px;
   
@@ -43,7 +46,7 @@
 }
 .post {
    border: 1px solid #668ff4;
-   padding: 5px ;
+   padding: 15px ;
   margin: 10px;
   overflow: hidden;
 }
