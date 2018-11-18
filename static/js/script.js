@@ -31,6 +31,22 @@ $(document).ready(function(){
         
     });
 
+    $('#upvote_button').click(function() {
+        $.ajax({
+            url: '/upvote/' + $('#span_rid').text(),
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+                var uv = $('#upvotes');
+                uv.text(parseInt(uv.text()) + 1);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
     
     
     

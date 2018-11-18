@@ -108,6 +108,11 @@ def update_recipe(recipe_id):
    return redirect('/')
 
 
+@app.route('/upvote/<recipe_id>', methods=["POST"])
+def upvote_recipe(recipe_id):
+
+    mongo.db.recipies.update({ '_id': ObjectId(recipe_id) }, { '$inc': { 'upvotes': 1 }})
+    return "OK"
 
 
 if __name__ == '__main__':
