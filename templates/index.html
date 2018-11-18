@@ -31,7 +31,16 @@
   </div>
   <div class="left">left</div>
   <div class="main">
-
+    <ul id="dropdown2" class="dropdown-content white lighten-5">
+      <li><a href="/sort/date_added/asc">Date Added (asc)</a></li>
+      <li><a href="/sort/date_added/desc">Date Added (desc)</a></li>
+      <li><a href="/sort/upvotes/asc">Upvotes (asc)</a></li>
+      <li><a href="/sort/upvotes/desc">Upvotes (desc)</a></li>
+      <li><a href="/sort/ingredients/asc">Ingredients (asc)</a></li>
+      <li><a href="/sort/ingredients/desc">Ingredients (desc)</a></li>
+    </ul>
+    <a class="btn-small pink lighten-4 dropdown-trigger" href="#!" data-target="dropdown2">Sort By:<i class="material-icons right">arrow_drop_down</i></a>
+    
     {% for recipe in recipies %}
       <div class="post">
         <form action="details/{{recipe._id}}">

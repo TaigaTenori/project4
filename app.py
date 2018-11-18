@@ -15,7 +15,17 @@ mongo = PyMongo(app)
 @app.route('/edited')
 def index():
     return render_template('index.html', recipies = mongo.db.recipies.find())
+    
+    
+@app.route('/sort/<sort_by>/<ad>')
+def index_sorted(sort_by, ad):
+    if ad == 'asc':
+        ad = 1
+    else:
+        ad = -1
 
+    return render_template('index.html', recipies = mongo.db.recipies.find().sort([ (sort_by, ad) ]))
+    
 @app.route('/add_recipe')
 def add_recipe():
     return render_template('add_recipe.html', categories = mongo.db.categories.find())
@@ -26,7 +36,7 @@ def insert_recipe():
     
     tmp_dict = {}
     tmp = request.form.to_dict()
-    print(tmp['ingredients'])
+
     tmp['ingredients'] =  tmp['ingredients'].replace('\r\n', ',')
     
     
@@ -36,16 +46,17 @@ def insert_recipe():
 
     # string.split() creates a list
     l_one = tmp['ingredients'].split(',')
-    print(tmp['ingredients'])
-    print(l_one)
+
     for i in range(0, len(l_one), 1):
         l_two = l_one[i].split('-')
         if len(l_two) == 2: # if the list isnt complete with key - value pair it means it's likely a comma from leading or trailing \r\n
             tmp_dict[l_two[0]] = l_two[1]
     
-    
+
     tmp['ingredients'] = tmp_dict
     
+    # Much easier to store it here than use mongodb's aggregate() later
+    tmp['ingredients_count'] = len(tmp_dict)
     
     # remove keys we won't be using
 
