@@ -30,9 +30,6 @@ with app.app_context():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    print(' ')
-    print(generate_password_hash('suchsecret'))
-    print(' ')
     if 'user' in session:
         return render_template('login.html', user = session['user'])
 
@@ -48,9 +45,16 @@ def login():
     
 @app.route('/register', methods = ['POST', 'GET'])
 def register():
+    if request.method == 'POST':
+        user = mongo.db.users.find_one({ "name": request.form['user'] })
+        if user:
+            return render_template('register.html', form = request.form) # send the form back so we can prefill the inputs for another attempt.
+        else:
+            mongo.db.users.insert_one( { "name" : request.form['user'], "email" : request.form['email'], "password" : generate_password_hash(request.form['password'])})
+            return render_template('register.html', success = True )
     
     return render_template('register.html')
-
+        
 @app.route('/')
 @app.route('/deleted')
 @app.route('/edited')

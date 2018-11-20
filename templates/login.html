@@ -3,13 +3,21 @@
 
   <div class="main">
     {%if not user %}
-    <form action="login" method="POST">
-        <input type="text" name="user"/>
-        <label for="user">Username</label>
-        <input type="text" name="password"/>
-        <label for="password">Password</label>
-        <button type="submit"></button>
-    </form>
+        <form action="{{url_for('login')}}" method="POST" class="col s6">
+            <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input name="user" id="user" type="text" class="validate">
+            <label for="user">Your name</label>
+            </div>
+            <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input name="password" id="password" type="text" class="validate">
+            <label for="password">Password</label>
+            </div>
+            <button class="btn waves-effect waves-light red" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
     {% else %}
     <p>You are logged in as {{user}}!</p>
     {% endif %}
