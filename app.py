@@ -20,11 +20,11 @@ def index():
 @app.route('/sort/<sort_by>/<ad>')
 def index_sorted(sort_by, ad):
     if ad == 'asc':
-        ad = 1
+        direction = 1
     else:
-        ad = -1
+        direction = -1
 
-    return render_template('index.html', recipies = mongo.db.recipies.find().sort([ (sort_by, ad) ]))
+    return render_template('index.html', sort = "{} ({})".format(sort_by, ad), recipies = mongo.db.recipies.find().sort([ (sort_by, direction) ]))
     
 @app.route('/add_recipe')
 def add_recipe():
