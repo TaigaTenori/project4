@@ -25,19 +25,26 @@
   </div>
   <div class="menu">
        <nav>
-          <div class="lime lighten-3 nav-wrapper">
+
+          <div class="lime lighten-1 nav-wrapper">
+
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              
+              {%if not session['user']%}
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Register</a></li>
+              {% endif %}
+              <li><a href="/search">Search</a></li>
             {% if session['user'] %}
+            <li><a href="/add_recipe">Add Recipe</a></li>
+            <li>
             <form action="/logout" method="POST">
               <button class="btn-small waves-effect waves-light red" type="submit" name="logout">Logout
               </button>
             </form>
+            </li>
             {% endif %}
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-              <li><a href="/add_recipe">Add Recipe</a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/register">Register</a></li>
-              <li><a href="/search">Search</a></li>
             </ul>
           </div>
         </nav>
