@@ -26,20 +26,24 @@ with app.app_context():
 
 
 
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return redirect('login')
+    
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if 'user' in session:
-        return render_template('login.html', user = session['user'])
+        return render_template('login.html', msg = "Already logged in", user = session['user'])
 
     if request.method == 'POST':
         user = mongo.db.users.find_one({ "name": request.form['user'] })
         if user:
             if check_password_hash(user['password'], request.form['password']):
                 session['user'] = user['name']
-                session['id'] = user['_id']
-                return render_template('login.html', user = session['user'])
+                return render_template('login.html', user = session['user'], msg = "Login successful")
         
     return render_template('login.html')
     

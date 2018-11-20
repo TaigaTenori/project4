@@ -26,7 +26,12 @@
   <div class="menu">
        <nav>
           <div class="lime lighten-3 nav-wrapper">
-            
+            {% if session['user'] %}
+            <form action="/logout" method="POST">
+              <button class="btn-small waves-effect waves-light red" type="submit" name="logout">Logout
+              </button>
+            </form>
+            {% endif %}
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
               <li><a href="/add_recipe">Add Recipe</a></li>
