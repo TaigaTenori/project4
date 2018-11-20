@@ -132,20 +132,25 @@ def recipe_details(recipe_id):
 @app.route('/edit/<recipe_id>')
 def edit_recipe(recipe_id):
     recipe = mongo.db.recipies.find_one({'_id': ObjectId(recipe_id) })
-    ingredients = recipe['ingredients']
-    return render_template('edit_recipe.html',categories = mongo.db.categories.find(), recipe = recipe, ingredients = ingredients )
+    if 'user' in session and recipe['username'] == session['user']:
+        ingredients = recipe['ingredients']
+        return render_template('edit_recipe.html',categories = mongo.db.categories.find(), recipe = recipe, ingredients = ingredients )
 
 @app.route('/delete/<recipe_id>')
 def delete_recipe(recipe_id):
-    mongo.db.recipies.delete_one({'_id': ObjectId(recipe_id) })
-    return redirect('/deleted')
+    recipe = mongo.db.recipies.find_one({'_id': ObjectId(recipe_id) })
+    if 'user' in session and recipe['username'] == session['user']:
+        mongo.db.recipies.delete_one({'_id': ObjectId(recipe_id) })
+        return redirect('/deleted')
     
 @app.route('/action/<recipe_id>', methods=["POST"])
 def decide_action(recipe_id):
-    if 'edit_button' in request.form.to_dict():
-        return edit_recipe(recipe_id)
-    else:
-        return delete_recipe(recipe_id)
+    recipe = mongo.db.recipies.find_one({'_id': ObjectId(recipe_id) })
+    if 'user' in session and recipe['username'] == session['user']:
+        if 'edit_button' in request.form.to_dict():
+            return edit_recipe(recipe_id)
+        else:
+            return delete_recipe(recipe_id)
 
     return redirect('/')
     
