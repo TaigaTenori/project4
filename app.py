@@ -81,7 +81,8 @@ def add_recipe():
 
 @app.route('/insert_recipe', methods= ['POST'])
 def insert_recipe():
-    
+    if not 'user' in session or session['user'] != request.form['username']:
+        return redirect('login')
     
     tmp_dict = {}
     tmp = request.form.to_dict()
