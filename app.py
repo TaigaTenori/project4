@@ -6,7 +6,8 @@ import time
 from bson.objectid import ObjectId
 import json
 from flask_mongo_sessions import MongoDBSessionInterface
-
+from werkzeug.security import generate_password_hash, \
+     check_password_hash
 
 
 
@@ -29,19 +30,26 @@ with app.app_context():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    print(' ')
+    print(generate_password_hash('suchsecret'))
+    print(' ')
     if 'user' in session:
         return render_template('login.html', user = session['user'])
 
     if request.method == 'POST':
-        user = mongo.db.users.find_one({ "name": request.form['user'], "password": request.form['password']})
+        user = mongo.db.users.find_one({ "name": request.form['user'] })
         if user:
-            session['user'] = user['name']
-            session['id'] = user['_id']
-            return render_template('login.html', user = user)
+            if check_password_hash(user['password'], request.form['password']):
+                session['user'] = user['name']
+                session['id'] = user['_id']
+                return render_template('login.html', user = session['user'])
         
     return render_template('login.html')
     
+@app.route('/register', methods = ['POST', 'GET'])
+def register():
     
+    return render_template('register.html')
 
 @app.route('/')
 @app.route('/deleted')
