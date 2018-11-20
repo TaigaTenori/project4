@@ -1,15 +1,48 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import os
 from flask_pymongo import PyMongo
+
 import time
 from bson.objectid import ObjectId
 import json
+from flask_mongo_sessions import MongoDBSessionInterface
+
+
+
+
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = "cookbook"
 app.config['MONGO_URI'] = "mongodb://admin:verysecret12@ds241012.mlab.com:41012/cookbook"
 
+
 mongo = PyMongo(app)
+
+
+
+with app.app_context():
+    app.session_interface = MongoDBSessionInterface(app, mongo.db, 'sessions')
+
+
+
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if 'user' in session:
+        return render_template('login.html', user = session['user'])
+
+    if request.method == 'POST':
+        user = mongo.db.users.find_one({ "name": request.form['user'], "password": request.form['password']})
+        if user:
+            session['user'] = user['name']
+            session['id'] = user['_id']
+            return render_template('login.html', user = user)
+        
+    return render_template('login.html')
+    
+    
+
 @app.route('/')
 @app.route('/deleted')
 @app.route('/edited')
