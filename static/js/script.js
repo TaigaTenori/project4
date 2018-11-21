@@ -1,34 +1,24 @@
 /* global $ */
 
 $(document).ready(function(){
-    $('#add_recipe').click(function (){
-        var x =  $('#ingredient');
-        var y =  $('#quantity');
+    var click = 0;
+    $('#add_ingredient').click(function (){
         
-        var ing = x.val();
-        var quantity = y.val();
-        
-        if (ing == '' || quantity == '') {
-            window.alert('Both Ingredient and Quantity fields must not be empty');
-            return;
-        }
-        var list = $('#ingredients');
-        var list2 = $('#quantities');
-        var txt = list.val();
-        var txt2 = list2.val();
-        var app = ''
-        if (txt != '') {
-            app = '\n' ;
-        }
-        list.val(txt + app + ing);
-        list2.val(txt2 + app + quantity)
-        
-        x.val('');
-        y.val('');
-        
-        M.textareaAutoResize($('#ingredients'));
-        M.textareaAutoResize($('#quantities'));
-        
+        var a = $(`<div id="ingredients">
+               <div class="ing1 input-field col s6">
+                  <i class="material-icons prefix">flag</i>
+                  <input name="ingredient${click}" id="ing${click}" type="text">
+                  <label for="ingredient${click}">Ingredient</label>
+                </div>
+               <div class="quant input-field col s6">
+                  <i class="material-icons prefix">flag</i>
+                  <input name="quantity${click}" id="quant${click}" type="text">
+                  <label for="quantity${click}">Quantity</label>
+                </div>
+            </div>`);
+
+        click++;
+        a.insertAfter('#ingredients');
     });
 
     $('#upvote_button').click(function() {

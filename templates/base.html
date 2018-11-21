@@ -27,13 +27,16 @@
        <nav>
 
           <div class="lime lighten-1 nav-wrapper">
-
+          
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
               
               {%if not session['user']%}
               <li><a href="/login">Login</a></li>
               <li><a href="/register">Register</a></li>
+              {% else %}
+              <li style=" color: #2d2d2d">Logged in as: {{session['user']}}</li>
+              <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
               {% endif %}
               <li><a href="/search">Search</a></li>
             {% if session['user'] %}

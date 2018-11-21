@@ -33,12 +33,24 @@
           <input name="origin" id="origin" type="text" class="validate">
           <label for="origin">Country of Origin</label>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-              <textarea rows=10 name="ingredients" id="ingredients" class="materialize-textarea"></textarea>
-              <label for="ingredients">Ingredients list (Correct use: ingredient - quantity)</label>
+        <div class="row"> 
+        
+        <!-- ingredient - quantity -->
+            <div id="ingredients">
+               <div class="ing1 input-field col s6">
+                  <i class="material-icons prefix">flag</i>
+                  <input name="ingredient" id="ing" type="text">
+                  <label for="ingredient">Ingredient</label>
+                </div>
+               <div class="quant input-field col s6">
+                  <i class="material-icons prefix">flag</i>
+                  <input name="quantity" id="quant" type="text">
+                  <label for="quantity">Quantity</label>
+                </div>
             </div>
+            
         </div>
+        <a id="add_ingredient" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add ingredient
        <div class="input-field col s6">
           <i class="material-icons prefix">image</i>
           <input name="image" id="image" type="text" class="validate">

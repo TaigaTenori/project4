@@ -86,7 +86,7 @@ def insert_recipe():
     
     tmp_dict = {}
     tmp = request.form.to_dict()
-
+    print(tmp)
     tmp['ingredients'] =  tmp['ingredients'].replace('\r\n', ',')
     
     
