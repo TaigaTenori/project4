@@ -4,9 +4,10 @@
   <div class="main">
         <h4>Add new recipe</h4>
         <p>&nbsp</p>
-        
+        <div class='warning' style="display: none; color: rgb(244, 67, 54)"> Please fill all the form fields before submitting</div>
+        <p>&nbsp</p>
         <!-- form -->
-        <form action="{{url_for('insert_recipe')}}" method="POST" class="col s6">
+        <form name="submit_recipe" action="{{url_for('insert_recipe')}}" method="POST" class="col s6">
             <div class="row">
               <div class="input-field col s12">
                 <select name='category'>
@@ -66,7 +67,7 @@
         <div class="row">
             <div class="col s10"></div>
             <div class="col s2">
-            <button class="btn waves-effect waves-light red" type="submit" name="action">Submit
+            <button id="submit_recipe" class="btn waves-effect waves-light red" type="submit" name="action">Submit
                 <i class="material-icons right">send</i>
             </button>
             </div>

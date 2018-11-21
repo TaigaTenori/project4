@@ -1,4 +1,6 @@
 /* global $ */
+
+// delegate is necessary as the button is created dynamically after document.ready() function.
 $(document).delegate('[id^=remove_ingredient]', 'click', function()
 {
    console.log('click');
@@ -7,7 +9,21 @@ $(document).delegate('[id^=remove_ingredient]', 'click', function()
 
 $(document).ready(function(){
     var click = 0;
-
+    
+    $("form[name='submit_recipe']").submit(function(e){
+        var isValid = true;
+        $("input").each(function() {
+           var element = $(this);
+           if (element.val() == "") {
+               isValid = false;
+           }
+        });
+        if (isValid === false) {
+            $('.warning').css('display', 'block') ;
+            $(window).scrollTop(0);
+            e.preventDefault(e);
+        }
+    });
     $('#add_ingredient').click(function (){
         
         var a = $(`<div class="added_div" id="row">
