@@ -1,8 +1,8 @@
 /* global $ */
 $(document).delegate('[id^=remove_ingredient]', 'click', function()
 {
-        console.log('click');
-       $(this).closest('.added_div').remove(); 
+   console.log('click');
+   $(this).closest('.added_div').remove(); 
 });
 
 $(document).ready(function(){

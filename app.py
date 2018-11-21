@@ -87,21 +87,10 @@ def insert_recipe():
     tmp_dict = {}
     tmp = request.form.to_dict()
     print(tmp)
-    tmp['ingredients'] =  tmp['ingredients'].replace('\r\n', ',')
-    
-    
-    #if tmp['ingredients'][-1:] == ',':
-    #    tmp['ingredients'] =  tmp['ingredients'][:-1]
-        
-
-    # string.split() creates a list
-    l_one = tmp['ingredients'].split(',')
-
-    for i in range(0, len(l_one), 1):
-        l_two = l_one[i].split('-')
-        if len(l_two) == 2: # if the list isnt complete with key - value pair it means it's likely a comma from leading or trailing \r\n
-            tmp_dict[l_two[0]] = l_two[1]
-    
+    for k, ingredient_name in tmp.items():
+        s = k.split('ingredient')
+        if len(s) > 1:
+            tmp_dict[ingredient_name] = tmp['quantity' + s[1]]
 
     tmp['ingredients'] = tmp_dict
     
@@ -109,7 +98,10 @@ def insert_recipe():
     tmp['ingredients_count'] = len(tmp_dict)
     
     # remove keys we won't be using
-
+    for k in tmp.keys():
+      if k != 'ingredients' and (k.startswith('ingredient') or k.startswith('quantity')):
+        tmp.pop(k)
+        
     del tmp['action']
     
     # last we need to add keys for date and upvotes
