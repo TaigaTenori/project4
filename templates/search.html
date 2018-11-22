@@ -11,11 +11,30 @@
         <input type="submit" value="Submit"/>
     
     </form>
+    <p>&nbsp;</p>
     {% for result in results %}
-    <p>
-        {{ result }}
-    </p>
+
+      <div class="post">
+        <form action="/details/{{result._id}}">
+            {% if result.image %}
+                <div class="polaroid">
+                   <img src="{{ result.image }}"/>
+                   <div class="img_container">
+                     <p> Mmm</p>
+                   </div>
+                </div>
+            {% endif %}
+            <p><strong>Category:</strong> {{ result.category }}</p>
+            <p><strong>Name:</strong> {{ result.title }}</p>
+            <p><strong>Date Added:</strong> {{ result.date_added }}</p>
+            <p><strong>Upvotes:</strong> {{ result.upvotes }}</p>
+            <button class="btn-small waves-effect waves-light red" type="submit" name="details">View Details
+                    <i class="material-icons right">send</i>
+             </button>
+         </form>
+      </div>
     {% endfor %}
+
 
 
 

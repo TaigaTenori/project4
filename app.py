@@ -74,12 +74,11 @@ def search():
 
         return render_template('search.html',
                                 results = mongo.db.recipies.find(
-                                { 'ingredients.{}'.format(term): {'$exists' : 'true' }}))
-                                    
-                                
-
-  #      return render_template('search.html', results = mongo.db.recipies.find({ '$or':[ {'title': re.compile(term, re.IGNORECASE)}, {'ingredients': term} ] }))
+                                    {'$or':[ { 'ingredients.{}'.format(term.lower()): {'$exists' : 'true' } },
+                                             { 'title': re.compile(term, re.IGNORECASE)} ] }
+                                             ))
     return render_template('search.html')
+    
 @app.route('/sort/<sort_by>/<ad>')
 def index_sorted(sort_by, ad):
     if ad == 'asc':
@@ -104,7 +103,7 @@ def insert_recipe():
     for k, ingredient_name in tmp.items():
         s = k.split('ingredient')
         if len(s) > 1:
-            tmp_dict[ingredient_name] = tmp['quantity' + s[1]]
+            tmp_dict[ingredient_name.lower()] = tmp['quantity' + s[1]]
 
     tmp['ingredients'] = tmp_dict
     
