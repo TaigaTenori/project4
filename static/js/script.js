@@ -8,7 +8,7 @@ $(document).delegate('[id^=remove_ingredient]', 'click', function()
 });
 
 $(document).ready(function(){
-    var click = 0;
+    var click = 120;
     
     $("form[name='submit_recipe']").submit(function(e){
         var isValid = true;

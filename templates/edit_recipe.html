@@ -33,15 +33,28 @@
           <input value="{{recipe.origin}}" name="origin" id="origin" type="text" class="validate">
           <label for="origin">Country of Origin</label>
         </div>
+        {% for ing, quant in ingredients.items() %}
+        
+
         <div class="row">
-
-            <div class="input-field col s12">
-              <textarea name="ingredients" id="ingredients" class="materialize-textarea">{% for ing, quant in ingredients.items() %}{{ing}} - {{quant}}&#13;{% endfor %}</textarea>
-              <label for="ingredients">Ingredients list</label>
+            <div id="ingredients" class="added_div">
+               <div class="ing1 input-field col s6">
+                  <i class="material-icons prefix">flag</i>
+                  <input value="{{ing}}" name="ingredient{{loop.index}}" id="ing{{loop.index}}" type="text">
+                  <label for="ingredient{{loop.index}}">Ingredient</label>
+                </div>
+               <div class="quant input-field col s3">
+                  <i class="material-icons prefix">flag</i>
+                  <input value="{{quant}}" name="quantity{{loop.index}}" id="quant{{loop.index}}" type="text">
+                  <label for="quantity{{loop.index}}">Quantity</label>
+                </div>
+               <div class="input-field col s3">
+                    <a id="remove_ingredient{{loop.index}}" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">indeterminate_check_box</i></a>
+                </div>
             </div>
-
         </div>
-
+        {% endfor %}
+         <a id="add_ingredient" class="btn-floating btn-small waves-effect waves-light red"><i class="material-icons">add</i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add ingredient
        <div class="input-field col s6">
           <i class="material-icons prefix">image</i>
           <input value="{{recipe.image}}" name="image" id="image" type="text" class="validate">
