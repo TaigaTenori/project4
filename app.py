@@ -53,10 +53,10 @@ def register():
     if request.method == 'POST':
         user = mongo.db.users.find_one({ "name": request.form['user'] })
         if user:
-            return render_template('register.html', form = request.form) # send the form back so we can prefill the inputs for another attempt.
+            return render_template('register.html', msg = "User with this name already exists", form = request.form) # send the form back so we can prefill the inputs for another attempt.
         else:
             mongo.db.users.insert_one( { "name" : request.form['user'], "email" : request.form['email'], "password" : generate_password_hash(request.form['password'])})
-            return render_template('register.html', success = True )
+            return render_template('login.html', msg = 'Registration successful - you can now log in.' )
     
     return render_template('register.html')
         

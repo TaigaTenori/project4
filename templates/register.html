@@ -7,20 +7,23 @@
         <p>
             Password is visible, otherwise browsers warn about the website being unsafe
         </p>
+        {%if msg %}
+            <p style="color: red"> {{ msg }}</p>
+        {% endif %}
         <form action="{{url_for('register')}}" method="POST" class="col s6">
             <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input name="user" id="user" type="text" class="validate">
+            <input {%if form %} value="{{form['user']}}"{%endif%} name="user" id="user" type="text" class="validate">
             <label for="user">Your name</label>
             </div>
             <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input name="email" id="email" type="text" class="validate">
+            <input {%if form %}value="{{form['email']}}"{%endif%} name="email" id="email" type="text" class="validate">
             <label for="email">Your e-mail</label>
             </div>
             <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input name="password" id="password" type="text" class="validate">
+            <input {%if form %}value="{{form['password']}}"{%endif%} name="password" id="password" type="text" class="validate">
             <label for="password">Password</label>
             </div>
             <button class="btn waves-effect waves-light red" type="submit" name="action">Submit
