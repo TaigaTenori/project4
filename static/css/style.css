@@ -9,8 +9,19 @@
   grid-template-columns: 120px 4fr 1fr;
   grid-template-rows: auto;
 }
+.right-img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+.left-img {
+  margin-top: 15vh;
+  max-width: 100%;
+  height: auto;
+
+}
 .container > div {
-  border: 1px dashed #888;
+  
 }
 .logo:visited{
   color: white;
@@ -40,7 +51,6 @@
 
 .main {
   grid-area: main;
-  height: -webkit-fill-available;
   padding: 5px;
   margin: 10px;
 }

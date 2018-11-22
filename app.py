@@ -9,6 +9,7 @@ from flask_mongo_sessions import MongoDBSessionInterface
 from werkzeug.security import generate_password_hash, \
      check_password_hash
 
+import re
 
 
 app = Flask(__name__)
@@ -65,7 +66,20 @@ def register():
 def index():
     return render_template('index.html', recipies = mongo.db.recipies.find())
     
-    
+
+@app.route('/search', methods=["POST", "GET"])
+def search():
+    if request.method == 'POST':
+        term = request.form['search_for']
+
+        return render_template('search.html',
+                                results = mongo.db.recipies.find(
+                                { 'ingredients.{}'.format(term): {'$exists' : 'true' }}))
+                                    
+                                
+
+  #      return render_template('search.html', results = mongo.db.recipies.find({ '$or':[ {'title': re.compile(term, re.IGNORECASE)}, {'ingredients': term} ] }))
+    return render_template('search.html')
 @app.route('/sort/<sort_by>/<ad>')
 def index_sorted(sort_by, ad):
     if ad == 'asc':

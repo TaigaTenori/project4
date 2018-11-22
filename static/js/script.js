@@ -26,13 +26,13 @@ $(document).ready(function(){
     });
     $('#add_ingredient').click(function (){
         
-        var a = $(`<div class="added_div" id="row">
-               <div class="ing1 input-field col s6">
+        var a = $(`<div class="row added_div">
+               <div class="input-field col s6">
                   <i class="material-icons prefix">flag</i>
                   <input name="ingredient${click}" id="ing${click}" type="text">
                   <label for="ingredient${click}">Ingredient</label>
                 </div>
-               <div class="quant input-field col s3">
+               <div class="input-field col s3">
                   <i class="material-icons prefix">flag</i>
                   <input name="quantity${click}" id="quant${click}" type="text">
                   <label for="quantity${click}">Quantity</label>

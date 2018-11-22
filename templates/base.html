@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head> 
-        <title> Cook Book Plus</title>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <title> Cook Book Plus</title>
+        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="{{url_for('static', filename='css/normalize.css')}}" type="text/css" />
@@ -26,7 +29,7 @@
   <div class="menu">
        <nav>
 
-          <div class="lime lighten-1 nav-wrapper">
+          <div style="background-color: #3d3e4c" class="nav-wrapper">
           
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
@@ -35,7 +38,7 @@
               <li><a href="/login">Login</a></li>
               <li><a href="/register">Register</a></li>
               {% else %}
-              <li style=" color: #2d2d2d">Logged in as: {{session['user']}}</li>
+              <li style=" color: silver">Logged in as: {{session['user']}}</li>
               <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
               {% endif %}
               <li><a href="/search">Search</a></li>
@@ -60,12 +63,18 @@
           </ul>
 
   </div>
-  <div class="left">left</div>
+  <div class="left">
+    <img class="left-img" src="{{url_for('static', filename='images/pine.png')}}"></img>
+  </div>
         {% block content %}
         
 
         {% endblock %}
-  <div class="right">right</div>
+  <div class="right">
+    <img class="right-img" src="https://marketplace.canva.com/MACAgkfGcLQ/1/0/thumbnail_large/canva-yellow-and-red-burger-recipe-book-cover-MACAgkfGcLQ.jpg"/>
+    <img class="right-img" src="https://marketplace.canva.com/MACAlpnbdL8/2/0/thumbnail_large/canva-green-apple-watercolor-recipe-kindle-cover-MACAlpnbdL8.jpg"/>
+    <img class="right-img" src="https://marketplace.canva.com/MAB_g-7K5Ls/1/0/thumbnail_large/canva-dark-simple-sushi-recipe-book-cover-MAB_g-7K5Ls.jpg"/>
+  </div>
   <div class="footer">footer</div>
 </div>
     <script>

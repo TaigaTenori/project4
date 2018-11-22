@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="main">
+    <h3> Search Recipies</h3>
+    
+    <form method="POST">
+        <label for="search_for"> What are you looking for?</label>
+        <input type="text" name="search_for"/>
+        
+        <input type="submit" value="Submit"/>
+    
+    </form>
+    {% for result in results %}
+    <p>
+        {{ result }}
+    </p>
+    {% endfor %}
+
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}
