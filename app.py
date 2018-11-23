@@ -90,6 +90,8 @@ def index_sorted(sort_by, ad):
     
 @app.route('/add_recipe')
 def add_recipe():
+    if not 'user' in session:
+        return redirect('login')
     return render_template('add_recipe.html', categories = mongo.db.categories.find())
 
 @app.route('/insert_recipe', methods= ['POST'])
@@ -99,7 +101,7 @@ def insert_recipe():
     
     tmp_dict = {}
     tmp = request.form.to_dict()
-    print(tmp)
+
     for k, ingredient_name in tmp.items():
         s = k.split('ingredient')
         if len(s) > 1:
