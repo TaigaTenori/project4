@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="main">
+    <h3> Summary</h3>
+    
+    <ul class="collection with-header">
+    <li class="collection-header"><strong>Categories</strong></li>
+    {%for res in result %}
+    <li class="collection-item">{{ res._id }} ({{res.count}} recipies) </li>
+    
+    {%endfor%}
+    </ul>
+
+</div>
+
+
+
+
+
+
+{% endblock %}
