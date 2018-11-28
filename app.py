@@ -180,16 +180,18 @@ def upvote_recipe(recipe_id):
 
 @app.route("/summary")
 def summary():
-
+    recipies = {}
+    if 'user' in session:
+        recipies = mongo.db.recipies.find({'username': session['user'] })
+        
     # find categories and count how many documents each of them has
-    
     d = mongo.db.recipies.aggregate([
             { '$group': { '_id': '$category', 'count': {'$sum':1} } },
             { '$sort': { 'count': -1} } # Can't use .sort with aggregate
 
         ])
  
-    return render_template('summary.html', result = d)
+    return render_template('summary.html', result = d, recipies = recipies)
 
 if __name__ == '__main__':
     app.run(host = os.getenv('IP', '0.0.0.0'),

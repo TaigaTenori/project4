@@ -3,7 +3,31 @@
 
 <div class="main">
     <h3> Summary</h3>
-    
+    {% if recipies %}
+        <p> Your recipies </p>
+        {% for recipe in recipies %}
+          <div class="post">
+            <form action="/details/{{recipe._id}}">
+                {% if recipe.image %}
+                    <div class="polaroid">
+                       <img src="{{ recipe.image }}"/>
+                       <div class="img_container">
+                         
+                       </div>
+                    </div>
+                {% endif %}
+                <p><strong>Category:</strong> {{ recipe.category }}</p>
+                <p><strong>Name:</strong> {{ recipe.title }}</p>
+                <p><strong>Date Added:</strong> {{ recipe.date_added }}</p>
+                <p><strong>Upvotes:</strong> {{ recipe.upvotes }}</p>
+                <button class="btn-small waves-effect waves-light red" type="submit" name="details">View Details
+                        <i class="material-icons right">send</i>
+                 </button>
+             </form>
+          </div>
+        {% endfor %}
+    {% endif %} 
+    <p>&nbsp;</p>
     <ul class="collection with-header">
     <li class="collection-header"><strong>Categories</strong></li>
     {%for res in result %}
