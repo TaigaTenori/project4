@@ -1,7 +1,8 @@
+
 # Cook Book Plus
 An online Cook Book where users can find and share their own recipies.
 
-## UX
+## UX / User Stories
 
 - As a user I want to share my recipies with the rest of the world
 	- I can register an account with my unique name
@@ -43,7 +44,19 @@ An online Cook Book where users can find and share their own recipies.
 
 ## Deployment
 
+As I had a ready Github repository this was really easy.  I've run these commands from app root directory
+```
+pip freeze --local > requirements.txt
+echo web: python app.py > Procfile
+```
+- Heroku
+-- Created a new app
+-- In the app settings connected to Github and chose project repository
+-- clicked Deploy from master branch
+
 
 ## Media
+Random food images from google search
 
 ## Credits
+I received inspiration for this project from CodeInstitute's milestone project outline
