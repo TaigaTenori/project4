@@ -40,7 +40,7 @@
             </button>
           {% endif %}
 
-          {% if recipe._id in user['upvote'] %}
+          {% if rid in user['upvote'] %}
             
             <img class="blackandwhite" id="upvote_button" src="{{url_for('static',filename = 'images/upvote-icon-11.jpg')}}"/>
           {% else %} 

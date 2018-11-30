@@ -138,7 +138,7 @@ def recipe_details(recipe_id):
     if 'user' in session:
         user = mongo.db.users.find_one( {'name': session['user']})
     
-    return render_template('recipe_details.html',user = user, rid = ObjectId(recipe_id), recipe = mongo.db.recipies.find_one({ '_id': ObjectId(recipe_id) }))
+    return render_template('recipe_details.html',user = user, rid = recipe_id, recipe = mongo.db.recipies.find_one({ '_id': ObjectId(recipe_id) }))
 
 @app.route('/edit/<recipe_id>')
 def edit_recipe(recipe_id):
