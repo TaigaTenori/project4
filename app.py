@@ -134,8 +134,11 @@ def insert_recipe():
     
 @app.route('/details/<recipe_id>')
 def recipe_details(recipe_id):
+    user = None
+    if 'user' in session:
+        user = mongo.db.users.find_one( {'name': session['user']})
     
-    return render_template('recipe_details.html', recipe = mongo.db.recipies.find_one({ '_id': ObjectId(recipe_id) }))
+    return render_template('recipe_details.html',user = user, rid = ObjectId(recipe_id), recipe = mongo.db.recipies.find_one({ '_id': ObjectId(recipe_id) }))
 
 @app.route('/edit/<recipe_id>')
 def edit_recipe(recipe_id):
@@ -173,10 +176,20 @@ def update_recipe(recipe_id):
 # This is AJAX only
 @app.route('/upvote/<recipe_id>', methods=["POST"])
 def upvote_recipe(recipe_id):
-
-    mongo.db.recipies.update({ '_id': ObjectId(recipe_id) }, { '$inc': { 'upvotes': 1 }})
-    return "OK"
-
+    if 'user' in session:
+        user = mongo.db.users.find_one( { 'name': session['user'] })
+        print(user)
+        if recipe_id in user['upvote']:
+            print('found recipe in users.upvote')
+            return None
+        
+        mongo.db.users.update(  { 'name': session['user'] },
+                                { '$push': { 'upvote': recipe_id } }
+        )
+        mongo.db.recipies.update({ '_id': ObjectId(recipe_id) }, { '$inc': { 'upvotes': 1 }})
+        return "OK"
+    else:
+        return None
 
 @app.route("/summary")
 def summary():

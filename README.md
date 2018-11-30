@@ -51,7 +51,7 @@ echo web: python app.py > Procfile
 ```
 - Heroku
 -- Created a new app
--- In the app settings connected to Github and chose project repository
+-- In the app settings -> deployment, connected to Github and chose project repository
 -- clicked Deploy from master branch
 
 

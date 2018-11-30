@@ -39,7 +39,14 @@
             <button class="btn-small waves-effect waves-light red" type="submit" name="delete_button">Delete Recipe<i class="material-icons right">delete</i>
             </button>
           {% endif %}
-          <img id="upvote_button" src="{{url_for('static',filename = 'images/upvote-icon-11.jpg')}}"/>
+
+          {% if recipe._id in user['upvote'] %}
+            
+            <img class="blackandwhite" id="upvote_button" src="{{url_for('static',filename = 'images/upvote-icon-11.jpg')}}"/>
+          {% else %} 
+            <img id="upvote_button" src="{{url_for('static',filename = 'images/upvote-icon-11.jpg')}}"/>
+          
+          {% endif %}
         </form>
       </div>
 
