@@ -5,7 +5,7 @@
     {%if not user %}
         <h3> Register an account</h3>
         <p>
-            Password is visible, otherwise browsers warn about the website being unsafe
+            
         </p>
         {%if msg %}
             <p style="color: red"> {{ msg }}</p>
@@ -23,7 +23,7 @@
             </div>
             <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input {%if form %}value="{{form['password']}}"{%endif%} name="password" id="password" type="text" class="validate">
+            <input {%if form %}value="{{form['password']}}"{%endif%} name="password" id="password" type="password" class="validate">
             <label for="password">Password</label>
             </div>
             <button class="btn waves-effect waves-light red" type="submit" name="action">Submit
